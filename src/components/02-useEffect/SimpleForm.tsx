@@ -1,30 +1,26 @@
 import './simple-form.css'
-import {useEffect, useState} from "react";
+import Message from "./Message";
+import {useEffect} from "react";
+import {useForm} from "../../hooks/useForm";
 
-interface User {
+interface FormData {
     name: string;
     email: string;
 }
 
 const SimpleForm = () => {
 
-    const [formState, setFormState] = useState<User>({
-        name: '',
-        email: ''
-    });
-
-    const {name, email} = formState;
-
     useEffect(() => {
         console.log('Hey!!!');
     }, [])
 
-    function handleInputChange(e: any) {
-        setFormState({
-            ...formState,
-            [e.target.name]: e.target.value
-        })
-    }
+    const {formState, handleInputChange} = useForm<FormData>({
+        name: 'Francisco',
+        email: 'frank@email.com'
+    });
+
+    const {name, email} = formState;
+
 
     return (
         <>
@@ -53,6 +49,9 @@ const SimpleForm = () => {
                     onChange={handleInputChange}
                 />
             </div>
+
+
+            {(name === 'Francisco') && <Message/>}
         </>
     );
 };
