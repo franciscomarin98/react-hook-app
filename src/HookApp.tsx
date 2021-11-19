@@ -1,8 +1,9 @@
-import CounterApp from "./components/01-useState/CounterApp";
+import SimpleForm from "./components/02-useEffect/SimpleForm";
 
 const HookApp = () => {
     return (
-        <CounterApp/>
+        // <CounterApp/>
+        <SimpleForm/>
     );
 };
 
