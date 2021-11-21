@@ -1,10 +1,11 @@
-import MultipleCustomHooks from "./components/03-examples/MultipleCustomHooks";
+import SimpleVideoPlayer from "./components/04-useRef/SimpleVideoPlayer";
 
 const HookApp = () => {
     return (
         // <CounterApp/>
         // <SimpleForm/>
-        <MultipleCustomHooks/>
+        // <MultipleCustomHooks/>
+        <SimpleVideoPlayer/>
     );
 };
 
