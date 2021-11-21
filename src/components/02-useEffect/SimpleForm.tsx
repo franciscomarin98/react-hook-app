@@ -21,9 +21,14 @@ const SimpleForm = () => {
 
     const {name, email} = formState;
 
+    const handleSubmit = (e:any) => {
+        e.preventDefault();
+        console.log(formState)
+    }
+
 
     return (
-        <>
+        <form onSubmit={handleSubmit}>
             <h1>Simple Form</h1>
             <hr/>
 
@@ -51,8 +56,10 @@ const SimpleForm = () => {
             </div>
 
 
-            {(name === 'Francisco') && <Message/>}
-        </>
+            {(name === 'Francis') && <Message/>}
+
+            <button type="submit" className={'btn btn-primary'}>Send</button>
+        </form>
     );
 };
 export default SimpleForm;

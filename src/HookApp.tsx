@@ -1,9 +1,10 @@
-import SimpleForm from "./components/02-useEffect/SimpleForm";
+import MultipleCustomHooks from "./components/03-examples/MultipleCustomHooks";
 
 const HookApp = () => {
     return (
         // <CounterApp/>
-        <SimpleForm/>
+        // <SimpleForm/>
+        <MultipleCustomHooks/>
     );
 };
 
