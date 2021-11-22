@@ -1,11 +1,12 @@
-import SimpleVideoPlayer from "./components/04-useRef/SimpleVideoPlayer";
+import Layout from "./components/05-layoutEffect/Layout";
 
 const HookApp = () => {
     return (
         // <CounterApp/>
         // <SimpleForm/>
         // <MultipleCustomHooks/>
-        <SimpleVideoPlayer/>
+        // <SimpleVideoPlayer/>
+        <Layout/>
     );
 };
 
