@@ -1,4 +1,4 @@
-import Layout from "./components/05-layoutEffect/Layout";
+import MemoHook from "./components/06-memo/MemoHook";
 
 const HookApp = () => {
     return (
@@ -6,7 +6,9 @@ const HookApp = () => {
         // <SimpleForm/>
         // <MultipleCustomHooks/>
         // <SimpleVideoPlayer/>
-        <Layout/>
+        // <Layout/>
+        // <Memorize/>
+        <MemoHook/>
     );
 };
 
