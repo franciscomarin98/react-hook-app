@@ -1,4 +1,4 @@
-import MemoHook from "./components/06-memo/MemoHook";
+import {Padre} from "./components/07-tarea-memo/Padre";
 
 const HookApp = () => {
     return (
@@ -8,7 +8,9 @@ const HookApp = () => {
         // <SimpleVideoPlayer/>
         // <Layout/>
         // <Memorize/>
-        <MemoHook/>
+        // <MemoHook/>
+        // <CallbackHook/>
+        <Padre/>
     );
 };
 
