@@ -1,4 +1,4 @@
-import {Padre} from "./components/07-tarea-memo/Padre";
+import TodoApp from "./components/08-useReducer/TodoApp";
 
 const HookApp = () => {
     return (
@@ -10,7 +10,8 @@ const HookApp = () => {
         // <Memorize/>
         // <MemoHook/>
         // <CallbackHook/>
-        <Padre/>
+        // <Padre/>
+        <TodoApp/>
     );
 };
 
