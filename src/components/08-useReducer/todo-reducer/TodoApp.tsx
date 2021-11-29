@@ -1,9 +1,11 @@
 import {useReducer} from "react";
-import {todoReducer} from "./todoReducer";
+import {todoReducer} from "./reducer/todo-reducer";
+import {Todo} from "./interfaces/todo";
 
-import './todo-app.css';
+import '../todo-app.css';
 
-const initialState = [
+
+const INITIAL_STATE: Todo[] = [
     {
         id: new Date().getTime(),
         desc: 'Learn React',
@@ -14,10 +16,19 @@ const initialState = [
 
 const TodoApp = () => {
 
-    // @ts-ignore
-    const [todos, dispatch] = useReducer(todoReducer, initialState)
+    const [todos, dispatch] = useReducer(todoReducer, INITIAL_STATE);
 
-    console.log(todos)
+    function handleSubmit(e: any) {
+        e.preventDefault();
+        dispatch({
+            type: 'add-todo',
+            payload: {
+                id: new Date().getTime(),
+                desc: 'Learn useReducer',
+                done: false
+            }
+        });
+    }
 
     return (
         <div className={'container my-5'}>
@@ -27,7 +38,7 @@ const TodoApp = () => {
                     <hr/>
                     <ul className={'list-group list-group-flush'}>
                         {
-                            todos.map((todo: any, i: number) => (
+                            todos.map((todo: Todo, i: number) => (
                                 <li key={todo.id} className={'list-group-item'}>
                                     <p>{i + 1}.- {todo.desc}</p>
                                     <button className={'btn btn-danger btn-sm'}>
@@ -41,7 +52,7 @@ const TodoApp = () => {
                 <div className="col-4">
                     <h5>Agregar TODO</h5>
                     <hr/>
-                    <form>
+                    <form onSubmit={handleSubmit}>
                         <input
                             type="text"
                             name="description"
@@ -52,7 +63,7 @@ const TodoApp = () => {
 
                         <div className="d-grid gap-2">
 
-                            <button className="btn btn-primary mt-2 "> Agregar</button>
+                            <button type={'submit'} className="btn btn-primary mt-2 "> Agregar</button>
 
                         </div>
                     </form>

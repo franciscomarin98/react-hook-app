@@ -1,4 +1,4 @@
-import TodoApp from "./components/08-useReducer/TodoApp";
+import TodoApp from "./components/08-useReducer/todo-reducer/TodoApp";
 
 const HookApp = () => {
     return (
