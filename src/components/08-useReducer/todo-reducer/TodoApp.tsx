@@ -1,11 +1,10 @@
-import {useEffect, useReducer} from "react";
-import {todoReducer} from "./reducer/todo-reducer";
-import {useForm} from "../../../hooks/useForm";
 import {Todo} from "./interfaces/todo";
+import {useEffect, useReducer} from "react";
 import TodoList from "./todo-components/TodoList";
+import TodoForm from "./todo-components/TodoForm";
+import {todoReducer} from "./reducer/todo-reducer";
 
 import '../todo-app.css';
-
 
 const INITIAL_STATE: Todo[] = []
 const init = () => JSON.parse(localStorage.getItem('todos') || '[]');
@@ -14,18 +13,15 @@ const init = () => JSON.parse(localStorage.getItem('todos') || '[]');
 const TodoApp = () => {
 
     const [todos, dispatch] = useReducer(todoReducer, INITIAL_STATE, init);
-    const {formState, handleInputChange, reset} = useForm({
-        description: ''
-    });
 
     useEffect(() => {
         localStorage.setItem('todos', JSON.stringify(todos));
     }, [todos]);
 
-    const handleDelete = (todo: Todo) => {
+    const handleAddTodo = (newTodo: Todo) => {
         dispatch({
-            type: "delete-todo",
-            payload: todo
+            type: 'add-todo',
+            payload: newTodo
         });
     }
 
@@ -36,22 +32,11 @@ const TodoApp = () => {
         });
     }
 
-    function handleSubmit(e: any) {
-        e.preventDefault();
-
-        if (!formState.description) {
-            return;
-        }
-
+    const handleDelete = (todo: Todo) => {
         dispatch({
-            type: 'add-todo',
-            payload: {
-                id: new Date().getTime(),
-                desc: formState.description,
-                done: false
-            }
+            type: "delete-todo",
+            payload: todo
         });
-        reset();
     }
 
     return (
@@ -69,23 +54,7 @@ const TodoApp = () => {
                 <div className="col-4">
                     <h5>Agregar TODO</h5>
                     <hr/>
-                    <form onSubmit={handleSubmit}>
-                        <input
-                            type="text"
-                            name="description"
-                            value={formState.description}
-                            className="form-control"
-                            placeholder="Write sometime..."
-                            autoComplete="off"
-                            onChange={handleInputChange}
-                        />
-
-                        <div className="d-grid gap-2">
-
-                            <button type={'submit'} className="btn btn-primary mt-2 "> Agregar</button>
-
-                        </div>
-                    </form>
+                    <TodoForm handleAddTodo={handleAddTodo}/>
                 </div>
             </div>
 
