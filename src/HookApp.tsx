@@ -1,4 +1,4 @@
-import TodoApp from "./components/08-useReducer/todo-reducer/TodoApp";
+import MainApp from "./components/09-useContext/01-bases-context/MainApp";
 
 const HookApp = () => {
     return (
@@ -11,7 +11,8 @@ const HookApp = () => {
         // <MemoHook/>
         // <CallbackHook/>
         // <Padre/>
-        <TodoApp/>
+        // <TodoApp/>
+        <MainApp/>
     );
 };
 
