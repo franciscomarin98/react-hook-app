@@ -27,6 +27,12 @@ const TodoApp = () => {
             payload: todo
         });
     }
+    const handleComplete = (todo: Todo) => {
+        dispatch({
+            type: "todo-completed",
+            payload: todo
+        });
+    }
 
     function handleSubmit(e: any) {
         e.preventDefault();
@@ -56,7 +62,8 @@ const TodoApp = () => {
                         {
                             todos.map((todo: Todo, i: number) => (
                                 <li key={todo.id} className={'list-group-item'}>
-                                    <p>{i + 1}.- {todo.desc}</p>
+                                    <p className={todo.done ? 'complete' : ''}
+                                       onClick={() => handleComplete(todo)}>{i + 1}.- {todo.desc}</p>
                                     <button onClick={() => handleDelete(todo)} className={'btn btn-danger btn-sm'}>
                                         Borrar
                                     </button>
