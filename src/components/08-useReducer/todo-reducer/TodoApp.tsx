@@ -1,33 +1,49 @@
-import {useReducer} from "react";
+import {useEffect, useReducer} from "react";
 import {todoReducer} from "./reducer/todo-reducer";
+import {useForm} from "../../../hooks/useForm";
 import {Todo} from "./interfaces/todo";
 
 import '../todo-app.css';
 
 
-const INITIAL_STATE: Todo[] = [
-    {
-        id: new Date().getTime(),
-        desc: 'Learn React',
-        done: false
-    }
-]
+const INITIAL_STATE: Todo[] = []
+const init = () => JSON.parse(localStorage.getItem('todos') || '[]');
 
 
 const TodoApp = () => {
 
-    const [todos, dispatch] = useReducer(todoReducer, INITIAL_STATE);
+    const [todos, dispatch] = useReducer(todoReducer, INITIAL_STATE, init);
+    const {formState, handleInputChange, reset} = useForm({
+        description: ''
+    });
+
+    useEffect(() => {
+        localStorage.setItem('todos', JSON.stringify(todos));
+    }, [todos]);
+
+    const handleDelete = (todo: Todo) => {
+        dispatch({
+            type: "delete-todo",
+            payload: todo
+        });
+    }
 
     function handleSubmit(e: any) {
         e.preventDefault();
+
+        if (!formState.description) {
+            return;
+        }
+
         dispatch({
             type: 'add-todo',
             payload: {
                 id: new Date().getTime(),
-                desc: 'Learn useReducer',
+                desc: formState.description,
                 done: false
             }
         });
+        reset();
     }
 
     return (
@@ -41,7 +57,7 @@ const TodoApp = () => {
                             todos.map((todo: Todo, i: number) => (
                                 <li key={todo.id} className={'list-group-item'}>
                                     <p>{i + 1}.- {todo.desc}</p>
-                                    <button className={'btn btn-danger btn-sm'}>
+                                    <button onClick={() => handleDelete(todo)} className={'btn btn-danger btn-sm'}>
                                         Borrar
                                     </button>
                                 </li>
@@ -56,9 +72,11 @@ const TodoApp = () => {
                         <input
                             type="text"
                             name="description"
+                            value={formState.description}
                             className="form-control"
                             placeholder="Write sometime..."
                             autoComplete="off"
+                            onChange={handleInputChange}
                         />
 
                         <div className="d-grid gap-2">

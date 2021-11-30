@@ -12,9 +12,14 @@ export const useForm = <T extends Object>(initialState: T) => {
         })
     }
 
+    const reset = () => {
+        setFormState(initialState)
+    }
+
     return {
         formState,
-        handleInputChange
+        handleInputChange,
+        reset
     }
 
 
