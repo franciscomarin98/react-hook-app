@@ -2,6 +2,7 @@ import {useEffect, useReducer} from "react";
 import {todoReducer} from "./reducer/todo-reducer";
 import {useForm} from "../../../hooks/useForm";
 import {Todo} from "./interfaces/todo";
+import TodoList from "./todo-components/TodoList";
 
 import '../todo-app.css';
 
@@ -27,6 +28,7 @@ const TodoApp = () => {
             payload: todo
         });
     }
+
     const handleComplete = (todo: Todo) => {
         dispatch({
             type: "todo-completed",
@@ -58,19 +60,11 @@ const TodoApp = () => {
                 <div className="col-7">
                     <h5>TODOs</h5>
                     <hr/>
-                    <ul className={'list-group list-group-flush'}>
-                        {
-                            todos.map((todo: Todo, i: number) => (
-                                <li key={todo.id} className={'list-group-item'}>
-                                    <p className={todo.done ? 'complete' : ''}
-                                       onClick={() => handleComplete(todo)}>{i + 1}.- {todo.desc}</p>
-                                    <button onClick={() => handleDelete(todo)} className={'btn btn-danger btn-sm'}>
-                                        Borrar
-                                    </button>
-                                </li>
-                            ))
-                        }
-                    </ul>
+                    <TodoList
+                        todos={todos}
+                        handleDelete={handleDelete}
+                        handleComplete={handleComplete}
+                    />
                 </div>
                 <div className="col-4">
                     <h5>Agregar TODO</h5>
